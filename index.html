@@ -111,7 +111,6 @@ body{height:100dvh;display:grid;grid-template-rows:var(--top-h) minmax(0,1fr);ov
 .social{position:relative;width:34px;height:34px;display:grid;place-items:center;border-radius:var(--r-1);color:var(--text-2);text-decoration:none}
 .social::before{content:'';position:absolute;inset:-5px}
 .social svg{width:21px;height:21px}
-.social .ext{position:absolute;right:1px;top:0;font:600 9px/1 var(--font-ui);color:var(--text-2)}
 .social .yt-body{fill:currentColor}.social .yt-play{fill:var(--surface-1)}
 .social .ig-line{fill:none;stroke:currentColor;stroke-width:2}.social .ig-dot{fill:currentColor}
 .social:is(:hover,:focus-visible) .yt-body{fill:var(--yt-red)}.social:is(:hover,:focus-visible) .yt-play{fill:var(--yt-play)}
@@ -2432,7 +2431,7 @@ function buildQuiz() {
       <p class="res-line">${right === total ? '모든 문제를 맞혔어요. 탐구 질문에서 까닭을 내 문장으로 써 볼까요?' : right >= total * 0.7 ? '잘했어요! 틀린 문제의 해설을 한 번 더 읽어 보세요.' : '실험 화면에서 직접 확인하고 다시 도전해 보세요.'}</p>
       ${wrong.length ? `<p class="qz-k">다시 볼 문제</p><div class="wrong-list">${wrong.map(({ id, i }) => `<button class="btn small" data-jump="${i}">${i + 1}번 · ${MCQ.find(q => q.id === id).tag}</button>`).join('')}</div>` : ''}
       <div class="qz-acts"><button class="btn primary" id="mcqRetry">${icon('reset')}다시 도전하기</button>${wrong.length ? `<button class="btn" id="mcqWrong">틀린 문제만 다시 풀기</button>` : ''}<button class="btn ghost" data-go="inq">탐구 질문으로</button></div>
-      <p class="qz-foot"><a class="textlink" href="${CHANNELS.yt}" target="_blank" rel="noopener noreferrer" aria-label="송쌤과학 유튜브 채널 (새 창)"><svg class="ic yt-ic" viewBox="0 0 24 24" aria-hidden="true">${ICONS.yt}</svg>유튜브에서 더 보기 ↗</a></p></section>`;
+      <p class="qz-foot"><a class="textlink" href="${CHANNELS.yt}" target="_blank" rel="noopener noreferrer" aria-label="송쌤과학 유튜브 채널 (새 창)"><svg class="ic yt-ic" viewBox="0 0 24 24" aria-hidden="true">${ICONS.yt}</svg>유튜브에서 더 보기</a></p></section>`;
   } else {
     const i = mcq.cur, id = mcq.order[i], q = MCQ.find(x => x.id === id), a = mcq.ans[id], answered = a != null, perm = mcq.perm[id];
     const opts = perm.map((oi, k) => {
@@ -2482,7 +2481,7 @@ function buildInq() {
     <header class="qz-head"><div><h1>탐구 질문</h1><p>간이 실험으로 상황을 확인하고, 내 문장으로 설명해 보세요.</p></div><div class="prog"><span id="progT">${done} / ${INQ.length} 작성</span><span class="dots" id="progD">${INQ.map(q => `<i class="${(answers[q.id] || '').trim() ? 'done' : ''}"></i>`).join('')}</span></div></header>
     <div class="policy"><p>모범 답안을 열면 처음 쓴 답안은 그대로 잠기고, 그 아래에 <b>다시 쓰기</b> 칸이 열려요. 처음 답안을 고쳐 덮어쓰지 않으니 마음 편히 먼저 써 보세요.</p><p class="save-note">답안은 이 탭에서만 자동 저장돼요(탭을 닫으면 지워져요). 모범 답안은 ${MIN_CHARS}자 이상 쓴 뒤 열 수 있어요.</p></div>
     <div class="qlist">${cards}</div>
-    <div class="quiz-end"><a class="textlink" href="${CHANNELS.yt}" target="_blank" rel="noopener noreferrer" aria-label="송쌤과학 유튜브 채널 (새 창)"><svg class="ic yt-ic" viewBox="0 0 24 24" aria-hidden="true">${ICONS.yt}</svg>유튜브에서 더 보기 ↗</a></div>
+    <div class="quiz-end"><a class="textlink" href="${CHANNELS.yt}" target="_blank" rel="noopener noreferrer" aria-label="송쌤과학 유튜브 채널 (새 창)"><svg class="ic yt-ic" viewBox="0 0 24 24" aria-hidden="true">${ICONS.yt}</svg>유튜브에서 더 보기</a></div>
   </div></section>`;
   INQ.forEach(q => {
     $(`#ans-${q.id}`).value = answers[q.id] || '';
@@ -2861,8 +2860,8 @@ function bind() {
 
 /* ═════════════ 시작 ═════════════ */
 function init() {
-  $('#yt').innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS.yt}</svg><span class="ext" aria-hidden="true">↗</span>`;
-  $('#ig').innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS.ig}</svg><span class="ext" aria-hidden="true">↗</span>`;
+  $('#yt').innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS.yt}</svg>`;
+  $('#ig').innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS.ig}</svg>`;
   $('#brandIc').innerHTML = icon('flask');
   $('#bookBtn').innerHTML = icon('book'); $('#helpBtn').innerHTML = icon('help');
   $$('[data-close]').forEach(b => { if (!b.innerHTML.trim()) b.innerHTML = icon('x'); });
